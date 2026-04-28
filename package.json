@@ -1,0 +1,56 @@
+{
+  "name": "cs2-inventory-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "vite --host 0.0.0.0 --port 5173",
+    "server": "node server/index.js",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 5173",
+    "desktop:dev": "cross-env ELECTRON_DEV=true electron electron-main.cjs",
+    "desktop": "npm run build && electron electron-main.cjs",
+    "dist:win": "npm run build && electron-builder --win portable --x64",
+    "dist:installer": "npm run build && electron-builder --win nsis --x64"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "typescript": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "latest",
+    "lucide-react": "latest",
+    "express": "latest",
+    "concurrently": "latest",
+    "cross-env": "latest",
+    "electron": "latest",
+    "electron-builder": "latest"
+  },
+  "devDependencies": {},
+  "main": "electron-main.cjs",
+  "build": {
+    "appId": "com.local.cs2inventorytracker",
+    "productName": "CS2 Inventory Tracker",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "server/**/*",
+      "data/**/*",
+      "electron-main.cjs",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron-main.cjs"
+    },
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "artifactName": "CS2-Inventory-Tracker-${version}.${ext}"
+    }
+  }
+}
